@@ -17,7 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    photobooth.cpp
+    #photobooth.cpp
 
 HEADERS += \
     photobooth.h
