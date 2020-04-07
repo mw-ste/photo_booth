@@ -17,7 +17,6 @@ public:
         initCamera();
     }
 
-
     ~PhotoBooth()
     {
         _camera->stop();
@@ -34,12 +33,17 @@ private:
         _centralWidget = new QWidget();
         setCentralWidget(_centralWidget);
 
-        _captureButton = new QPushButton("Capture Image", _centralWidget);
-
         _viewFinder = new QCameraViewfinder(_centralWidget);
         _viewFinder->resize(1024, 600);
+
+        _captureButton = new QPushButton("Capture Image", _centralWidget);
         connect(_captureButton, &QPushButton::clicked, this, &PhotoBooth::captureImage);
 
+        initLayout();
+    }
+
+    void initLayout()
+    {
         auto mainLayout = new QVBoxLayout();
         mainLayout->addWidget(_viewFinder);
         mainLayout->addWidget(_captureButton);
@@ -50,7 +54,7 @@ private:
     {
         if(!isAnyCameraAvailable())
         {
-            throw "Could not find any Camera!";
+            throw new std::runtime_error("Could not find any Camera!");
         }
 
         const QList<QCameraInfo> cameraInfos = QCameraInfo::availableCameras();
@@ -64,6 +68,11 @@ private:
         _camera->setViewfinder(_viewFinder);
         _camera->setCaptureMode(QCamera::CaptureStillImage);
         _camera->start();
+    }
+
+    bool isAnyCameraAvailable()
+    {
+        return (QCameraInfo::availableCameras().count() > 0);
     }
 
 public slots:
@@ -81,11 +90,6 @@ public slots:
 
         //on shutter button released
         _camera->unlock();
-    }
-
-    bool isAnyCameraAvailable()
-    {
-        return (QCameraInfo::availableCameras().count() > 0);
     }
 };
 

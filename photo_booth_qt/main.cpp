@@ -1,11 +1,17 @@
 #include "photobooth.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    PhotoBooth w;
-    w.show();
-    return a.exec();
+    try
+    {
+        QApplication a(argc, argv);
+        auto w = new PhotoBooth();
+        w->show();
+        return a.exec();
+    }
+    catch (std::exception* e)
+    {
+        std::cout << "Error: " << e->what() << std::endl;
+    }
 }
