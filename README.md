@@ -7,7 +7,7 @@ Project start: 11-03-2020
 Components used:
 ----------------
 
-* Raspberry Pi 3B (https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) 
+* Raspberry Pi 3B (https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
 * Canon EOS 700d (https://www.canon.de/for_home/product_finder/cameras/digital_slr/eos_700d/)
 * Waveshare 7 inch screen (https://www.waveshare.com/wiki/7inch_LCD_for_Pi)
 * DSLR power supply (https://www.amazon.de/subtel®-Qualitäts-Netzteil-Canon-Rebel/dp/B00MUHPO8Y/)
@@ -39,7 +39,7 @@ You also need to remove the line `dtoverlay=vc4-fkms-V3D` from `config.txt` as s
 #dtoverlay=vc4-fkms-v3d
 max_framebuffers=2
 dpi_timings=1024 0 0 0 88 600 0 0 0 0 0 0 0 60 0 26000000 6
- 
+
 [all]
 #dtoverlay=vc4-fkms-v3d
 dtoverlay=dpi24
@@ -75,7 +75,7 @@ framebuffer_height=900
 
 
 ## Install dependencies
-`sudo apt-get install gphoto2 (v4l2loopback-source ?) (v4l2loopback-dkms ?)`
+`sudo apt-get install gphoto2 v4l2loopback-utils`
 
 ```
 sudo apt-get install        \
@@ -121,3 +121,10 @@ pi@raspberrypi4:~ $ gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvi
 * Select `Media` --> `Open Capture Device` --> `Video Device Name`
 * Enter `/dev/video0`
 * Press `Play`
+
+
+## Development
+`sudo apt-get install qtcreator qt5-default qtmultimedia5-dev`
+
+Open QtCreator
+Got to: `Tools` &rarr; `Options` &rarr; `Kits` &rarr; `Kits`, Select `Manual` &rarr; `Desktop (default)`, Check that `Qt version` is set!!!
